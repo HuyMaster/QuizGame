@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 
-namespace QuizGame {
+namespace QuizGame.utils {
 
-	internal class Logger {
+	internal class Log {
 
-		public static void d(string message) {
+		public static void d(object message) {
 			StackTrace stackTrace = new();
 			StackFrame? frame = stackTrace.GetFrame(1);
 			if (frame == null) { return; }
@@ -19,7 +19,7 @@ namespace QuizGame {
 			Print("Unknown", message, LogLevel.DEBUG);
 		}
 
-		public static void i(string message) {
+		public static void i(object message) {
 			StackTrace stackTrace = new();
 			StackFrame? frame = stackTrace.GetFrame(1);
 			if (frame == null) { return; }
@@ -33,7 +33,7 @@ namespace QuizGame {
 			Print("Unknown", message, LogLevel.INFO);
 		}
 
-		public static void w(string message) {
+		public static void w(object message) {
 			StackTrace stackTrace = new();
 			StackFrame? frame = stackTrace.GetFrame(1);
 			if (frame == null) { return; }
@@ -47,7 +47,7 @@ namespace QuizGame {
 			Print("Unknown", message, LogLevel.WARN);
 		}
 
-		public static void e(string message) {
+		public static void e(object message) {
 			StackTrace stackTrace = new();
 			StackFrame? frame = stackTrace.GetFrame(1);
 			if (frame == null) { return; }
@@ -61,7 +61,7 @@ namespace QuizGame {
 			Print("Unknown", message, LogLevel.ERROR);
 		}
 
-		private static void Print(string tag, string message, LogLevel level) {
+		private static void Print(string tag, object message, LogLevel level) {
 			switch (level) {
 				case LogLevel.DEBUG:
 					Console.ForegroundColor = ConsoleColor.Blue;
