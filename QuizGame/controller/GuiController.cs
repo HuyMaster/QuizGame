@@ -1,4 +1,5 @@
-﻿using QuizGame.utils;
+﻿using QuizGame.gui;
+using QuizGame.utils;
 
 namespace QuizGame.controller {
 

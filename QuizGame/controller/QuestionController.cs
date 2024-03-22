@@ -1,4 +1,5 @@
-﻿using QuizGame.utils;
+﻿using QuizGame.gui;
+using QuizGame.@interface;
 
 namespace QuizGame.controller {
 
@@ -19,18 +20,41 @@ namespace QuizGame.controller {
 			this.name = name;
 		}
 
-		public void Start() {
-			foreach (IQuestion question in questions) {
-				Log.i(question);
+		public List<Result> Start() {
+			List<Result> results = [];
+			foreach (IQuestion item in questions) {
+				Result result = new(item);
+				if (item is SingleChoiceQuestion sQ) {
+					GuiController.instance.Change(new SingleChoiceQuestionGui(name, sQ, ref result));
+				} else if (item is MultiChoiceQuestion mQ) {
+					GuiController.instance.Change(new MultiChoiceQuestionGui(name, mQ, ref result));
+				} else if (item is TextAnswerQuestion tQ) {
+					GuiController.instance.Change(new TextAnswerQuestionGui(name, tQ, ref result));
+				} else {
+					result.Correct = false;
+				}
+				results.Add(result);
+			}
+			GuiController.instance.Change(new ResultGui(results));
+			return results;
+		}
+
+		public class Result {
+			public readonly IQuestion Question;
+			public bool Correct { get; set; }
+
+			public Result(IQuestion Question) {
+				this.Question = Question;
+				Correct = false;
+			}
+
+			public override string ToString() {
+				return $"{Question} : {Correct}";
 			}
 		}
 
-		public class Builder {
-			private readonly QuestionController questionManager;
-
-			public Builder(string name) {
-				questionManager = new QuestionController(name);
-			}
+		public class Builder(string name) {
+			private readonly QuestionController questionManager = new(name);
 
 			public Builder AddQuestion(IQuestion question) {
 				questionManager.questions.Add(question);

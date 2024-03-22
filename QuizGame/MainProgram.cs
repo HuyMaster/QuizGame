@@ -1,5 +1,7 @@
 ﻿using QuizGame.controller;
+using QuizGame.@interface;
 using QuizGame.utils;
+using System.Windows.Forms;
 
 namespace QuizGame {
 
@@ -11,7 +13,8 @@ namespace QuizGame {
 			Log.d($"Input args: [{string.Join(", ", args)}]");
 			Log.i("Application starting...");
 			controller.Start();
-			QuestionController.Create()
+			QuestionController.Create("Racing Boy Examination")
+				.AddQuestion(new TextAnswerQuestion("Hello", ""))
 				.Build().Start();
 		}
 
