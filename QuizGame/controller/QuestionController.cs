@@ -1,5 +1,6 @@
 ﻿using QuizGame.gui;
 using QuizGame.@interface;
+using QuizGame.utils;
 
 namespace QuizGame.controller {
 
@@ -39,30 +40,36 @@ namespace QuizGame.controller {
 			return results;
 		}
 
-		public class Result {
-			public readonly IQuestion Question;
-			public bool Correct { get; set; }
-
-			public Result(IQuestion Question) {
-				this.Question = Question;
-				Correct = false;
-			}
+		public class Result(IQuestion Question) {
+			public readonly IQuestion Question = Question;
+			public bool Correct { get; set; } = false;
 
 			public override string ToString() {
 				return $"{Question} : {Correct}";
 			}
 		}
 
-		public class Builder(string name) {
-			private readonly QuestionController questionManager = new(name);
+		public partial class Builder(string name) : QuestionController(name) {
 
 			public Builder AddQuestion(IQuestion question) {
-				questionManager.questions.Add(question);
+				if (questions.Count >= 20) {
+					Log.e("Maximum number of questions reached (max.20)");
+					return this;
+				}
+				questions.Add(question);
 				return this;
 			}
 
+			public Builder AddQuestion(string question, string answer) {
+				return AddQuestion(new TextAnswerQuestion(question, answer));
+			}
+
+			public Builder AddQuestion(string question, string[] answer_title, int correctAnswer, bool multichoice) {
+				return multichoice ? AddQuestion(new MultiChoiceQuestion(question, answer_title, correctAnswer)) : AddQuestion(new SingleChoiceQuestion(question, answer_title, correctAnswer));
+			}
+
 			public QuestionController Build() {
-				return questionManager;
+				return this;
 			}
 		}
 	}

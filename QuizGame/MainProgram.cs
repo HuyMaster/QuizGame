@@ -13,11 +13,12 @@ namespace QuizGame {
 			Log.d($"Input args: [{string.Join(", ", args)}]");
 			Log.i("Application starting...");
 			controller.Start();
-			QuestionController.Create()
-				.AddQuestion(new TextAnswerQuestion("Retype this: Hello", "hello"))
-				.AddQuestion(new TextAnswerQuestion("Retype this: Hi", "hi"))
-				.AddQuestion(new SingleChoiceQuestion("How old are you?", ["Yes, I am", "I'm fine", "My name is Huy", "I'm 18"], 0x0001))
-				.Build().Start();
+			QuestionController
+				.Create()
+				.AddQuestion("Hello", "")
+				.AddQuestion("Hi", "")
+				.AddQuestion("5", "")
+				.Start();
 		}
 
 		private static void ProcessExit(object? sender, EventArgs e) {

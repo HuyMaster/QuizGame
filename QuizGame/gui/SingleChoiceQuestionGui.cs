@@ -62,6 +62,7 @@ namespace QuizGame.gui {
 			//
 			// radioButton1
 			//
+			answer_1.Checked = false;
 			answer_1.AutoSize = true;
 			answer_1.Location = new Point(3, 3);
 			answer_1.Name = "answer_1";
@@ -73,6 +74,7 @@ namespace QuizGame.gui {
 			//
 			// radioButton2
 			//
+			answer_2.Checked = false;
 			answer_2.AutoSize = true;
 			answer_2.Location = new Point(280, 3);
 			answer_2.Name = "answer_2";
@@ -84,6 +86,7 @@ namespace QuizGame.gui {
 			//
 			// radioButton3
 			//
+			answer_3.Checked = false;
 			answer_3.AutoSize = true;
 			answer_3.Location = new Point(3, 74);
 			answer_3.Name = "answer_3";
@@ -95,6 +98,7 @@ namespace QuizGame.gui {
 			//
 			// radioButton4
 			//
+			answer_4.Checked = false;
 			answer_4.AutoSize = true;
 			answer_4.Location = new Point(280, 74);
 			answer_4.Name = "answer_4";

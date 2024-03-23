@@ -19,8 +19,9 @@ namespace QuizGame.gui {
 		protected override void ConfirmAction(object? sender, EventArgs e) {
 			string pattern = $"[\\s]*{question.CorrectAnswer.ToLower()}[\\s]*";
 			string answer = answer_text.Text.ToLower();
+			int len = answer.Length;
 			Match match = Regex.Match(answer, pattern);
-			result.Correct = match.Value.Length == answer.Length;
+			result.Correct = match.Value.Length == len && match.Success;
 			Dispose();
 		}
 

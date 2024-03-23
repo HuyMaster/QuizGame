@@ -22,7 +22,7 @@ namespace QuizGame.gui {
 			answer |= answer_3.Checked ? 0x0010 : 0;
 			answer |= answer_4.Checked ? 0x0001 : 0;
 
-			result.Correct = (answer & question.CorrectAnswer) == question.CorrectAnswer;
+			result.Correct = answer == question.CorrectAnswer && question.CorrectAnswer != 0;
 			Dispose();
 		}
 

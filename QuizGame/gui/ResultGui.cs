@@ -55,6 +55,8 @@ namespace QuizGame.gui {
 			//
 			// ResultGui
 			//
+			float scores = results.Count == 0 ? -1 : (float) results.FindAll(x => x.Correct).Count * 10 / results.Count;
+			Text = $"Result ({scores:0.0})";
 			ClientSize = new Size(584, 361);
 			Controls.Add(result_table);
 			Name = "ResultGui";
